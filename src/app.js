@@ -1,14 +1,14 @@
+const Koa = require('koa')
+const bodyParser = require('koa-bodyparser')
+const Session = require('koa-session')
+const Passport = require('koa-passport')
+
 const app = function(inject) {
-
-
-  const Koa = require('koa')
-  const Router = require('koa-router')
-  const bodyParser = require('koa-bodyparser')
-  const Passport = require('koa-passport')
 
   const app = new Koa()
 
   app.keys = ['buskit-secreykeyofsecrets']
+  app.use(Session(app))
   app.use(bodyParser())
 
   app.config = inject.config
@@ -17,35 +17,15 @@ const app = function(inject) {
   if (app.db.connect != null && typeof app.db.connect === 'function')
       app.db.connect(app.config.DB_CONNECTION_STRING)
 
-  app.passport = require('passport')
-  const strategies = new inject.strategies(app.db, app.config)
-  for (var strat in strategies) {
-    app.passport.use(strategies[strat])
-  }
-
-  const AuthRouter = new Router()
-  AuthRouter.get('/auth/twitch/', ctx => ctx.login())
-  AuthRouter.get('/auth/twitch/redirect', ctx => {
-    ctx.isAuthenticated()
-    console.log('You made it!')
-    ctx.body = "You made it!"
-  })
-
+  app.passport = inject.passport(app.db)
   app.use(Passport.initialize())
+  app.use(Passport.session())
 
-  app.use(AuthRouter.routes())
-  app.use(AuthRouter.allowedMethods())
-
-  // app.use(Router.post('/users', async ctx => {
-  //   if (!ctx.request.body)
-  //     return ctx.throw(400, 'No request body')
-  //   if (!ctx.request.body.name)
-  //     return ctx.throw(400, 'No request body')
-
-  //   const new_user = new User({ name: ctx.request.body.name })
-  //   const result = await new_user.save()
-  //   ctx.body = result
-  // }))
+  for (var router in inject.routes) {
+    const r = new inject.routes[router](app)
+    app.use(r.routes())
+    app.use(r.allowedMethods())
+  }
 
   return app
 }
@@ -54,7 +34,11 @@ app.GetDefaultInjection = function(allowConnect) {
   const inject = {
     config: require('../config'),
     db: require('./db'),
-    strategies: require('./strategies'),
+    passport: require('./passport'),
+
+    routes: {
+      auth: require('./routes/auth'),
+    }
   }
 
   if (!allowConnect)
