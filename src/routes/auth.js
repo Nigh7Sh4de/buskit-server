@@ -37,7 +37,10 @@ module.exports = class Auth extends Router {
           issuer: 'tv.buskit'
         })
 
-        ctx.body = { token }
+        ctx.body = { 
+          ...user.toJSON(),
+          token 
+        }
 
       }
       catch(err) {
