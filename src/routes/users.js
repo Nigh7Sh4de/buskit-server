@@ -1,14 +1,14 @@
 const Router = require('koa-router')
-const Passport = require('koa-passport')
 
 
 module.exports = class Users extends Router {
   constructor(app) {
     super()
-    
-    this.get('/users/:id', async ctx => {
+
+    this.get('/users/:id', app.passport.authenticate('jwt', { session: false}), async ctx => {
       const auth = ctx.isAuthenticated()
-      return ctx.body = { auth }
+      const user = ctx.req.user
+      return ctx.body = { auth, user }
     })
   }
 }

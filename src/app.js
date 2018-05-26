@@ -1,7 +1,6 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const Session = require('koa-session')
-const Passport = require('koa-passport')
 
 const app = function(inject) {
 
@@ -16,7 +15,8 @@ const app = function(inject) {
   if (app.db.connect != null && typeof app.db.connect === 'function')
       app.db.connect(app.config.DB_CONNECTION_STRING)
 
-  app.use(Passport.initialize())
+  app.passport = inject.passport(app.db)
+  app.use(app.passport.initialize())
 
   for (var router in inject.routes) {
     const r = new inject.routes[router](app)

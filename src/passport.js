@@ -4,9 +4,9 @@ var JwtStrategy = require('passport-jwt').Strategy,
 const User = require('./db/users')
 
 module.exports = function(db) {
-  async function checkUser({sub: { id }}, cb) {
+  async function checkUser(profile, cb) {
     try {
-      let user = await db.users.findById(id) 
+      let user = await db.users.findById(profile.id) 
       if (!user) 
         cb(new Error('you dont exist sorry'))
       cb(null, user)
@@ -15,26 +15,12 @@ module.exports = function(db) {
       cb(err)
     }
   }
-
+  
   Passport.use(new JwtStrategy({
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: ['buskit-thesecretestofkeys'],
+    secretOrKey: 'buskit-thesecretestofkeys',
     issuer: ['tv.buskit'],
   }, checkUser))
-  
-  Passport.serializeUser((user, done) => {
-    done(null, user.id)
-  })
-
-  Passport.deserializeUser(async (id, done) => {
-    try {
-      const user = db.users.findById(id)
-      done(null, user)
-    }
-    catch(err) {
-      done(err)
-    }
-  })
 
   return Passport
 }
