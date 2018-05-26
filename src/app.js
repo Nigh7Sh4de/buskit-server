@@ -8,7 +8,6 @@ const app = function(inject) {
   const app = new Koa()
 
   app.keys = ['buskit-secreykeyofsecrets']
-  app.use(Session(app))
   app.use(bodyParser())
 
   app.config = inject.config
@@ -17,9 +16,7 @@ const app = function(inject) {
   if (app.db.connect != null && typeof app.db.connect === 'function')
       app.db.connect(app.config.DB_CONNECTION_STRING)
 
-  app.passport = inject.passport(app.db)
   app.use(Passport.initialize())
-  app.use(Passport.session())
 
   for (var router in inject.routes) {
     const r = new inject.routes[router](app)
@@ -38,6 +35,7 @@ app.GetDefaultInjection = function(allowConnect) {
 
     routes: {
       auth: require('./routes/auth'),
+      users: require('./routes/users'),
     }
   }
 

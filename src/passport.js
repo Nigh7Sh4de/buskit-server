@@ -1,18 +1,14 @@
 const Passport = require('koa-passport')
-const TwitchStrategy = require('passport-twitch-new').Strategy
+var JwtStrategy = require('passport-jwt').Strategy,
+    ExtractJwt = require('passport-jwt').ExtractJwt
 const User = require('./db/users')
 
 module.exports = function(db) {
-  async function checkUser(strategy, profile, cb) {
+  async function checkUser({sub: { id }}, cb) {
     try {
-      const search = { ['authid.' + strategy]: profile.id }
-      let user = await db.users.findOne(search) 
+      let user = await db.users.findById(id) 
       if (!user) 
-        user = await new User({
-          ...search,
-          profile,
-        }).save()
-  
+        cb(new Error('you dont exist sorry'))
       cb(null, user)
     }
     catch(err) {
@@ -20,15 +16,12 @@ module.exports = function(db) {
     }
   }
 
-  Passport.use(new TwitchStrategy({
-    clientID: "k6zpqqplgc8nyknrnkag6qhfpesc9p",
-    clientSecret: "lhkndwvkvhqgqx6yv1rulqqcpc02am",
-    callbackURL: "http://localhost:3000/auth/twitch/redirect",
-    scope: "openid",
-  }, (accessToken, refreshToken, profile, done) => {
-    checkUser('twitch', profile, done)
-  }))
-
+  Passport.use(new JwtStrategy({
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: ['buskit-thesecretestofkeys'],
+    issuer: ['tv.buskit'],
+  }, checkUser))
+  
   Passport.serializeUser((user, done) => {
     done(null, user.id)
   })
