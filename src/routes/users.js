@@ -6,9 +6,7 @@ module.exports = class Users extends Router {
     super()
 
     this.get('/users/:id', app.passport.authenticate('jwt', { session: false}), async ctx => {
-      const auth = ctx.isAuthenticated()
-      const user = ctx.req.user
-      return ctx.body = { auth, user }
+      return ctx.body = ctx.req.user
     })
   }
 }
