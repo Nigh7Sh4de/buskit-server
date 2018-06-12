@@ -1,10 +1,13 @@
 const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
 const Session = require('koa-session')
+const CORS = require('koa2-cors')
 
 const app = function(inject) {
 
   const app = new Koa()
+
+  app.use(CORS())
 
   app.keys = ['buskit-secreykeyofsecrets']
   app.use(bodyParser())
