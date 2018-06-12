@@ -39,6 +39,7 @@ app.GetDefaultInjection = function(allowConnect) {
     routes: {
       auth: require('./routes/auth'),
       users: require('./routes/users'),
+      streams: require('./routes/streams'),
     }
   }
 
