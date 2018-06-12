@@ -11,7 +11,7 @@ module.exports = class Auth extends Router {
     // this.get('/auth/twitch/', Passport.authenticate('twitch', { forceVerify: true }))
     this.get('/auth/twitch/redirect', async ctx => {
       try {
-        const codeResponse = await axios.post('https://id.twitch.tv/oauth2/token?client_id=k6zpqqplgc8nyknrnkag6qhfpesc9p&client_secret=lhkndwvkvhqgqx6yv1rulqqcpc02am&code=' + ctx.request.query.code + '&grant_type=authorization_code&redirect_uri=buskit://buskit.tv/redirect')
+        const codeResponse = await axios.post('https://id.twitch.tv/oauth2/token?client_id=k6zpqqplgc8nyknrnkag6qhfpesc9p&client_secret=lhkndwvkvhqgqx6yv1rulqqcpc02am&code=' + ctx.request.query.code + '&grant_type=authorization_code&redirect_uri=http://localhost:8080/redirect')
         const userResponse = await axios.get('https://api.twitch.tv/helix/users', {
           headers: { Authorization: 'Bearer ' + codeResponse.data.access_token }
         })
