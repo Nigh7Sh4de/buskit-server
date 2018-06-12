@@ -12,7 +12,7 @@ module.exports = class Users extends Router {
         }
       })
       return ctx.body = {
-        data: streams.data
+        data: streams.data.data
       }
     })
   }
