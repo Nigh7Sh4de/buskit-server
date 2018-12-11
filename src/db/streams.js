@@ -2,18 +2,6 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 const Stream = new Schema({
-  id: String,
-  title: String,
-  type: String,
-  viewer_count: Number,
-  thumbnail_url: String,
-  started_at: Date,
-}, {
-  _id: false,
-  timestamps: true,
-})
-
-const User = new Schema({
   profile: {
     display_name: String,
     description: String,
@@ -22,7 +10,6 @@ const User = new Schema({
   authid: {
     twitch: String,
   },
-  streams: [Stream],
   subscriptions: {
     
   },
@@ -30,4 +17,4 @@ const User = new Schema({
   timestamps: true,
 })
 
-module.exports = mongoose.model('User', User)
+module.exports = mongoose.model('Stream', Stream)

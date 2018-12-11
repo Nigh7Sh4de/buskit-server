@@ -22,7 +22,7 @@ async@2.1.4:
   dependencies:
     lodash "^4.14.0"
 
-axios@^0.18.0:
+axios@0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
   integrity sha1-MtU+SFHv3AoRmTts0AB4nXDAUQI=
@@ -35,7 +35,7 @@ bluebird@3.5.0:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.0.tgz#791420d7f551eea2897453a8a77653f96606d67c"
   integrity sha1-eRQg1/VR7qKJdFOop3ZT+WYG1nw=
 
-bson@~1.0.4, bson@~1.0.5:
+bson@~1.0.4:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.6.tgz#444db59ddd4c24f0cb063aabdc5c8c7b0ceca912"
   integrity sha512-D8zmlb46xfuK2gGvKmUjIklQEouN2nQ0LEHHeZ/NoHM2LDiMk2EYzZ5Ntw/Urk+bgMDosOZxaRzXxvhI5TcAVQ==
@@ -235,7 +235,7 @@ isstream@~0.1.2:
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
   integrity sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
 
-jsonwebtoken@^8.2.0, jsonwebtoken@^8.2.1:
+jsonwebtoken@8.2.1, jsonwebtoken@^8.2.0:
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-8.2.1.tgz#333ee39aa8f238f32fa41693e7a2fb7e42f82b31"
   integrity sha512-l8rUBr0fqYYwPc8/ZGrue7GiW7vWdZtZqelxo4Sd5lMvuEeCK8/wS54sEo6tJhdZ6hqfutsj6COgC0d1XdbHGw==
@@ -278,7 +278,7 @@ keygrip@~1.0.2:
   resolved "https://registry.yarnpkg.com/keygrip/-/keygrip-1.0.2.tgz#ad3297c557069dea8bcfe7a4fa491b75c5ddeb91"
   integrity sha1-rTKXxVcGneqLz+ek+kkbdcXd65E=
 
-koa-bodyparser@^4.2.0:
+koa-bodyparser@4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/koa-bodyparser/-/koa-bodyparser-4.2.0.tgz#bce6e08bc65f8709b6d1faa9411c7f0d8938aa54"
   integrity sha1-vObgi8Zfhwm20fqpQRx/DYk4qlQ=
@@ -311,14 +311,14 @@ koa-is-json@^1.0.0:
   resolved "https://registry.yarnpkg.com/koa-is-json/-/koa-is-json-1.0.0.tgz#273c07edcdcb8df6a2c1ab7d59ee76491451ec14"
   integrity sha1-JzwH7c3Ljfaiwat9We52SRRR7BQ=
 
-koa-passport@^4.0.1:
+koa-passport@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/koa-passport/-/koa-passport-4.0.1.tgz#ffe41c62d3bbdc5f7c49c375dcf9606e9297a337"
   integrity sha512-MqfeVS4fHvu7rBVHG6yt7YL0SA905sPsHJsDmklW3NGTYXDO6y8IiVUhKPLBQwye/cSSpCgozy5RcjcgCA/gYg==
   dependencies:
     passport "^0.4.0"
 
-koa-router@^7.4.0:
+koa-router@7.4.0:
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-7.4.0.tgz#aee1f7adc02d5cb31d7d67465c9eacc825e8c5e0"
   integrity sha512-IWhaDXeAnfDBEpWS6hkGdZ1ablgr6Q6pGdXCyK38RbzuH4LkUOpPqPw+3f8l8aTDrQmBQ7xJc0bs2yV4dzcO+g==
@@ -330,7 +330,7 @@ koa-router@^7.4.0:
     path-to-regexp "^1.1.1"
     urijs "^1.19.0"
 
-koa-session@^5.8.1:
+koa-session@5.8.1:
   version "5.8.1"
   resolved "https://registry.yarnpkg.com/koa-session/-/koa-session-5.8.1.tgz#f57b558a20e4da713cc2f96bfa67946bb4110548"
   integrity sha512-S60gS2xTDcw1PRcwdWT8Nono/MOWuAoC3bMBsvyuEBeq6g5CAOcG+bcIwwxxpCQ95B7O7weNNZpeS4oAq7Qtkg==
@@ -341,12 +341,12 @@ koa-session@^5.8.1:
     pedding "^1.1.0"
     uid-safe "^2.1.3"
 
-koa2-cors@^2.0.5:
+koa2-cors@2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/koa2-cors/-/koa2-cors-2.0.5.tgz#3404712cd092f728c7f72de704ee7b920d957658"
   integrity sha1-NARxLNCS9yjH9y3nBO57kg2Vdlg=
 
-koa@^2.5.1:
+koa@2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/koa/-/koa-2.5.1.tgz#79f8b95f8d72d04fe9a58a8da5ebd6d341103f9c"
   integrity sha512-cchwbMeG2dv3E2xTAmheDAuvR53tPgJZN/Hf1h7bTzJLSPcFZp8/t5+bNKJ6GaQZoydhZQ+1GNruhKdj3lIrug==
@@ -443,36 +443,36 @@ mime-types@^2.0.7, mime-types@~2.1.18:
   dependencies:
     mime-db "~1.33.0"
 
-mongodb-core@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.8.tgz#8d401f4eab6056c0d874a3d5844a4844f761d4d7"
-  integrity sha512-dFxfhH9N7ohuQnINyIl6dqEF8sYOE0WKuymrFf3L3cipJNrx+S8rAbNOTwa00/fuJCjBMJNFsaA+R2N16//UIw==
+mongodb-core@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.7.tgz#a9941f14883a75768d554cef5fd67756a9cc0f25"
+  integrity sha512-z6YufO7s40wLiv2ssFshqoLS4+Kf+huhHq6KZ7gDArsKNzXYjAwTMnhEIJ9GQ8fIfBGs5tBLNPfbIDoCKGPmOw==
   dependencies:
     bson "~1.0.4"
     require_optional "^1.0.1"
 
-mongodb@3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.8.tgz#2c1daecac9a0ec2de2f2aea4dc97d76ae70f8951"
-  integrity sha512-mj7yIUyAr9xnO2ev8pcVJ9uX7gSum5LLs1qIFoWLxA5Il50+jcojKtaO1/TbexsScZ9Poz00Pc3b86GiSqJ7WA==
+mongodb@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.7.tgz#cfcbaee992d78dabca67177f8f9db9cf13ac3a44"
+  integrity sha512-n/14kMJEoARXz1qhpNPhUocqy+z5130jhqgEIX1Tsl8UVpHrndQ8et+VmgC4yPK/I8Tcgc93JEMQCHTekBUnNA==
   dependencies:
-    mongodb-core "3.0.8"
+    mongodb-core "3.0.7"
 
 mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.0.17:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.1.0.tgz#5002b9e4af8ea3f131b443756a01c979d22decb3"
-  integrity sha512-GFx4Z2YpfxRQ9BExd2ML5MDKYdzOjdXB5a6fhove98EP6iB8tgZDY/fKSociEMJSIA37auPXmKfGfrc2uAMkMQ==
+mongoose@5.0.17:
+  version "5.0.17"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.0.17.tgz#7c70e663b8ac567460902dca636ebb59f36a540a"
+  integrity sha512-RV1WBQhzW7oOhStR+s7LQYfgQWTJm4hgmU3TqtgTiBCfnj5/sNliX2/SY+ef7tpIZRUqEBV5xITZdAlwQ6Ymdg==
   dependencies:
     async "2.1.4"
-    bson "~1.0.5"
+    bson "~1.0.4"
     kareem "2.0.7"
     lodash.get "4.4.2"
-    mongodb "3.0.8"
+    mongodb "3.0.7"
     mongoose-legacy-pluralize "1.0.2"
     mpath "0.4.1"
     mquery "3.0.0"
@@ -527,7 +527,7 @@ parseurl@^1.3.0:
   resolved "https://registry.yarnpkg.com/parseurl/-/parseurl-1.3.2.tgz#fc289d4ed8993119460c156253262cdc8de65bf3"
   integrity sha1-/CidTtiZMRlGDBViUyYs3I3mW/M=
 
-passport-jwt@^4.0.0:
+passport-jwt@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/passport-jwt/-/passport-jwt-4.0.0.tgz#7f0be7ba942e28b9f5d22c2ebbb8ce96ef7cf065"
   integrity sha512-BwC0n2GP/1hMVjR4QpnvqA61TxenUMlmfNjYNgK0ZAs0HK4SOQkHcSv4L328blNTLtHq7DbmvyNJiH+bn6C5Mg==

@@ -19,18 +19,32 @@ https://dev.twitch.tv/docs/authentication/getting-tokens-oauth/#oauth-authorizat
 
 ## API
 
+### Auth
+
+**GET /auth/twitch/redirect**
+Verify twitch auth code and return JWT for Buskit user
+
+Query Parameters
+
+code | Authorization code issued to be verified with Twitch
+
+Response
+
+user | the user object or `null` if not found
+token | JWT for further protected route access
+
 ### Users
 
-**GET /users/:id**
+**GET /users**
 Retrieve a user from the database
 
-Parameters
+Query Parameters
 
 id | id of the user to retreive
 
 Response
 
-data | the user object or `null` if not found
+user | the user object or `null` if not found
 
 ### Streams
 
