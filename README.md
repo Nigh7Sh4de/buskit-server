@@ -39,7 +39,7 @@ Get all streams
 
 Response
 
-data | array of stream objects
+streams | array of stream objects
 
 
 ### Tags

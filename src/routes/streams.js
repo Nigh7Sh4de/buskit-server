@@ -9,13 +9,9 @@ module.exports = class Users extends Router {
   }
 
   async getStreams(ctx) {
-    const streams = await axios.get('https://api.twitch.tv/helix/streams', {
-      headers: {
-        'Client-ID': 'k6zpqqplgc8nyknrnkag6qhfpesc9p'
-      }
-    })
+    const streams = await this.db.streams.find({}).exec()
     return ctx.body = {
-      data: streams.data.data
+      streams,
     }
   }
 }
