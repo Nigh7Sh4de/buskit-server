@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 const Tag = new Schema({
-    label: String,
+    _id: String,
 }, {
   timestamps: true,
 })

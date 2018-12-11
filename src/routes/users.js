@@ -10,7 +10,7 @@ module.exports = class Users extends Router {
   }
 
   async getUser(ctx) {
-    const user = await this.db.users.findById(ctx.request.query.id).exec()
+    const user = await this.db.users.findById(ctx.params.id).exec()
     return ctx.body = {
       user,
     }
