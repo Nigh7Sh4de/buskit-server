@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var User = require('./users')
-var Tag = require('./tags')
+const User = require('./users')
+const Tag = require('./tags')
 
 module.exports = class db {
   constructor() {

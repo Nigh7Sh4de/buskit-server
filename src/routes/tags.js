@@ -12,7 +12,7 @@ module.exports = class Users extends Router {
   }
 
   async getTags(ctx) {
-    const tags = await this.db.tags.find({}).exec()
+    const tags = await this.app.db.tags.find({}).exec()
     return ctx.body = {
       tags,
     }
@@ -46,7 +46,6 @@ module.exports = class Users extends Router {
   }
 
   async deleteTag(ctx) {
-    console.log(ctx.params)
     let tag = null
     try {
       tag = await this.app.db.tags.findById(ctx.params.tag).exec()

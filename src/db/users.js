@@ -1,17 +1,9 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+const mongoose = require('mongoose')
+const { Schema } = mongoose
+const { ObjectId } = Schema.Types
 
-const Stream = new Schema({
-  id: String,
-  title: String,
-  type: String,
-  viewer_count: Number,
-  thumbnail_url: String,
-  started_at: Date,
-}, {
-  _id: false,
-  timestamps: true,
-})
+const Stream = require('./streams').schema
+const Video = require('./videos').schema
 
 const User = new Schema({
   profile: {
@@ -22,10 +14,12 @@ const User = new Schema({
   authid: {
     twitch: String,
   },
-  streams: [Stream],
-  subscriptions: {
-    
-  },
+  stream: Stream,
+  videos: [Video],
+  tags: [{
+    type: ObjectId,
+    ref: 'Tag',
+  }],
 }, {
   timestamps: true,
 })
