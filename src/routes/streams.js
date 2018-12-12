@@ -13,12 +13,39 @@ module.exports = class Users extends Router {
   }
 
   async getStreams(ctx) {
-    const $elemMatch = ctx.request.query
-    const streams = await this.app.db.users.find({
-      stream: { $elemMatch }
-    }).exec()
+    const query = {}
+    for (let prop in ctx.request.query) {
+      switch (prop) {
+        case 'tags':
+          query[`stream.${prop}`] = { 
+            $in: await this.app.db.tags
+              .find({
+                label: { $in: ctx.request.query[prop].split(',') }
+              }) 
+              .exec()
+          }
+          break;
+        default: query[`stream.${prop}`] = ctx.request.query[prop]
+      }
+    }
+    let users
+
+    try {
+      users = await this.app.db.users
+      .find(query)
+      .exec()
+      if (!users.length) {
+        const e = new Error('Streams not found')
+        e.status = 404
+        throw e
+      }
+    }
+    catch(e) {
+      return ctx.throw(e.status || 500, e)
+    }
+
     return ctx.body = {
-      streams,
+      streams: users.map(user => user.stream),
     }
   }
 
