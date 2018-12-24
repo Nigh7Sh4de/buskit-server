@@ -21,10 +21,9 @@ const app = function(inject) {
   app.passport = inject.passport(app.db)
   app.use(app.passport.initialize())
 
-  for (var router in inject.routes) {
-    const r = new inject.routes[router](app)
+  for (var router in inject.api) {
+    const r = new inject.api[router](app)
     app.use(r.routes())
-    app.use(r.allowedMethods())
   }
 
   return app
@@ -34,14 +33,8 @@ app.GetDefaultInjection = function(allowConnect) {
   const inject = {
     config: require('../config'),
     db: require('./db'),
-    passport: require('./passport'),
-
-    routes: {
-      auth: require('./routes/auth'),
-      users: require('./routes/users'),
-      streams: require('./routes/streams'),
-      tags: require('./routes/tags'),
-    }
+    passport: require('./lib/passport'),
+    api: require('./api'),
   }
 
   if (!allowConnect)

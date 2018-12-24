@@ -4,6 +4,7 @@ const { ObjectId } = Schema.Types
 
 const Stream = require('./streams').schema
 const Video = require('./videos').schema
+const Security = require('./security').schema
 
 const User = new Schema({
   profile: {
@@ -20,6 +21,7 @@ const User = new Schema({
     type: ObjectId,
     ref: 'Tag',
   }],
+  security: Security,
 }, {
   timestamps: true,
 })

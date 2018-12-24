@@ -1,7 +1,6 @@
 const Passport = require('koa-passport')
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt
-const User = require('./db/users')
 
 module.exports = function(db) {
   async function checkUser(profile, cb) {
