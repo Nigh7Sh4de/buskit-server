@@ -9,17 +9,24 @@ module.exports = class Users extends Router {
     const { security } = app.db
     this.app = app
 
+    this.get('/users',
+      this.getAllUsers.bind(this),
+    )
+
     this.get('/users/:id', 
-      app.passport.authenticate('jwt', { session: false}), 
-      verifyUser(security.levels.admin), 
       this.getUser.bind(this),
     )
   }
 
+  async getAllUsers(ctx) {
+    const users = await this.app.db.users.find({}).exec()
+    return ctx.body = {
+      users,
+    }
+  }
+
   async getUser(ctx) {
-    console.log(`1`)
     const user = await this.app.db.users.findById(ctx.params.id).exec()
-    console.log(user)
     return ctx.body = {
       user,
     }
