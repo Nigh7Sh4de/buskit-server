@@ -21,8 +21,9 @@ const app = function(inject) {
   app.passport = inject.passport(app.db)
   app.use(app.passport.initialize())
 
-  for (var router in inject.api) {
+  for (let router in inject.api) {
     const r = new inject.api[router](app)
+    app[router] = r
     app.use(r.routes())
   }
 

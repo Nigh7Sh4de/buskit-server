@@ -1,7 +1,7 @@
 const Router = require('koa-router')
 const axios = require('axios')
 
-module.exports = class Users extends Router {
+module.exports = class Streams extends Router {
   constructor(app) {
     super()
     this.app = app
@@ -114,16 +114,13 @@ module.exports = class Users extends Router {
   }
 
   archiveStream(user) {
-    // TODO: Get video from Twitch and add tags from deleted video
-    // const tags = [ ...user.stream.tags ]
-    // const videosResponse = axios.get('https://api.twitch.tv/helix/videos', {
-    //   params: {
-    //     user_id: user.authid.twitch,
-    //   }
-    // })
-    // const video = { ...videosResponse.data.data[0], tags }
-    // user.videos = [ ...user.videos, video ]
-    user.stream = {}
-    user.save()
+    const tags = [ ...user.stream.tags ]
+    const videosResponse = axios.get('https://api.twitch.tv/helix/videos', {
+      params: {
+        user_id: user.authid.twitch,
+      }
+    })
+    const video = { ...videosResponse.data.data[0], tags }
+    this.app.videos.addVideoToUser(user, video)
   }
 }
