@@ -44,8 +44,13 @@ module.exports = class Streams extends Router {
       return ctx.throw(e.status || 500, e)
     }
 
+    const streams = users.map(user => ({
+      ...user.stream.toJSON(),
+      user_id: user.id,
+    }))
+
     return ctx.body = {
-      streams: users.map(user => user.stream),
+      streams,
     }
   }
 
