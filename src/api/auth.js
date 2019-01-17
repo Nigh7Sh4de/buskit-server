@@ -3,6 +3,9 @@ const Passport = require('koa-passport')
 const axios = require('axios')
 const jsonwebtoken = require('jsonwebtoken')
 
+const redirect_uri = 'https://www.buskit.live/redirect'
+const client_id = 'zeod52e6vf639p7ztytpuekmyucm2n'
+const client_secret = 'n5i3yuhfki8u9mllimmk9l6hetvgvt'
 
 module.exports = class Auth extends Router {
   constructor(app) {
@@ -14,7 +17,7 @@ module.exports = class Auth extends Router {
 
   async authWithTwitch(ctx) {
     try {
-      const codeResponse = await axios.post(`https://id.twitch.tv/oauth2/token?client_id=k6zpqqplgc8nyknrnkag6qhfpesc9p&client_secret=lhkndwvkvhqgqx6yv1rulqqcpc02am&code=${ctx.request.query.code}&grant_type=authorization_code&redirect_uri=http://localhost:8080/redirect`)
+      const codeResponse = await axios.post(`https://id.twitch.tv/oauth2/token?client_id=${client_id}&client_secret=${client_secret}&code=${ctx.request.query.code}&grant_type=authorization_code&redirect_uri=${redirect_uri}`)
       const userResponse = await axios.get('https://api.twitch.tv/helix/users', {
         headers: { Authorization: 'Bearer ' + codeResponse.data.access_token }
       })
@@ -46,11 +49,11 @@ module.exports = class Auth extends Router {
     return await axios.post('https://api.twitch.tv/helix/webhooks/hub', {
       'hub.mode': 'subscribe',
       'hub.topic': `https://api.twitch.tv/helix/streams?user_id=${id}`,
-      'hub.callback': `http://138.197.147.219:3000/streams/sub?user_id=${id}`,
+      'hub.callback': `https://www.buskit.live/streams/sub?user_id=${id}`,
       'hub.lease_seconds': 300,
       'hub.secret': 'buskit-twitchsecret',
     }, {
-      headers: { 'Client-ID': 'k6zpqqplgc8nyknrnkag6qhfpesc9p' },
+      headers: { 'Client-ID': 'zeod52e6vf639p7ztytpuekmyucm2n' },
     })
   }
   
