@@ -7,7 +7,9 @@ const app = function(inject) {
 
   const app = new Koa()
 
-  app.use(CORS())
+  app.use(CORS({
+    origin: 'https://www.buskit.live'
+  }))
 
   app.keys = ['buskit-secreykeyofsecrets']
   app.use(bodyParser())
