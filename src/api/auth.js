@@ -3,10 +3,6 @@ const Passport = require('koa-passport')
 const axios = require('axios')
 const jsonwebtoken = require('jsonwebtoken')
 
-const redirect_uri = 'https://www.buskit.live/redirect'
-const client_id = 'zeod52e6vf639p7ztytpuekmyucm2n'
-const client_secret = 'n5i3yuhfki8u9mllimmk9l6hetvgvt'
-
 module.exports = class Auth extends Router {
   constructor(app) {
     super()
@@ -16,9 +12,12 @@ module.exports = class Auth extends Router {
   }
 
   async authWithTwitch(ctx) {
+    const { SECRET_KEY } = this.app.config
+    const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI } = this.app.config.twitch
+
     try {
-      const codeResponse = await axios.post(`https://id.twitch.tv/oauth2/token?client_id=${client_id}&client_secret=${client_secret}&code=${ctx.request.query.code}&grant_type=authorization_code&redirect_uri=${redirect_uri}`)
-      const userResponse = await axios.get('https://api.twitch.tv/helix/users', {
+      const codeResponse = await axios.post(`${api.token}?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}&code=${ctx.request.query.code}&grant_type=authorization_code&redirect_uri=${REDIRECT_URI}`)
+      const userResponse = await axios.get(api.GET_USER, {
         headers: { Authorization: 'Bearer ' + codeResponse.data.access_token }
       })
 
@@ -28,8 +27,8 @@ module.exports = class Auth extends Router {
       const token = jsonwebtoken.sign({
         display_name: user.profile.display_name,
         id: user.id,
-      }, 'buskit-thesecretestofkeys', {
-        issuer: 'tv.buskit'
+      }, SECRET_KEY, {
+        issuer: ISSUER,
       })
 
       ctx.body = { 
@@ -46,14 +45,17 @@ module.exports = class Auth extends Router {
   }
 
   async subscribeToStreamChanges(id) {
-    return await axios.post('https://api.twitch.tv/helix/webhooks/hub', {
+    const { PUBLIC_URI } = this.app.config
+    const { CLIENT_ID, CLIENT_SECRET } = this.app.config.twitch
+
+    return await axios.post(api.webhooks, {
       'hub.mode': 'subscribe',
-      'hub.topic': `https://api.twitch.tv/helix/streams?user_id=${id}`,
-      'hub.callback': `https://www.buskit.live/streams/sub?user_id=${id}`,
-      'hub.lease_seconds': 300,
-      'hub.secret': 'buskit-twitchsecret',
+      'hub.topic': `${api.streams}?user_id=${id}`,
+      'hub.callback': `${PUBLIC_URI}/streams/sub?user_id=${id}`,
+      'hub.lease_seconds': 864000,
+      'hub.secret': CLIENT_SECRET,
     }, {
-      headers: { 'Client-ID': 'zeod52e6vf639p7ztytpuekmyucm2n' },
+      headers: { 'Client-ID': CLIENT_ID },
     })
   }
   

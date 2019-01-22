@@ -119,8 +119,9 @@ module.exports = class Streams extends Router {
   }
 
   archiveStream(user) {
+    const { api } = this.app.config.twitch
     const tags = [ ...user.stream.tags ]
-    const videosResponse = axios.get('https://api.twitch.tv/helix/videos', {
+    const videosResponse = axios.get(api.videos, {
       params: {
         user_id: user.authid.twitch,
       }

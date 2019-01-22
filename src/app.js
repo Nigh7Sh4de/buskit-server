@@ -7,14 +7,13 @@ const app = function(inject) {
 
   const app = new Koa()
 
+  app.config = inject.config
+
   app.use(CORS({
-    origin: 'https://www.buskit.live'
+    origin: app.config.CORS_ORIGIN,
   }))
 
-  app.keys = ['buskit-secreykeyofsecrets']
   app.use(bodyParser())
-
-  app.config = inject.config
 
   app.db = new inject.db()
   if (app.db.connect != null && typeof app.db.connect === 'function')
