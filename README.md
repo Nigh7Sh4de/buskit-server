@@ -97,3 +97,5 @@ Save tags into database. Tags are unique in the database, therefore any posted t
 | --- | --- |
 | tags | array of tag objects inserted or already found in database |
 | error | any error that may have occured |
+
+🍕
